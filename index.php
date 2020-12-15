@@ -13,19 +13,21 @@
        2. che mail contenga un punto e una chiocciola
        3. e che age sia un numero.
        Se tutto è ok stampare “Accesso riuscito”, altrimenti “Accesso negato”  -->
+       <h1>Risultato controllo per accesso</h1>
     <?php
-        $mail=  $_GET['email'];
-        $nome=  $_GET['nome'];
-        $eta=   $_GET['eta'];  
+        $mail=false;
+        $nome= false;
+        $eta=  false;  
     ?> 
     <!-- controlla inserimento mail -->
      <?php
         if(empty ( $_GET['email'] ) ) {
             echo 'ERRORE Non è stato inserito nessun valore per mail';
         }else if( strpos($_GET['email'] , '@' )=== false || strpos($_GET['email'] , '.' ) === false) {
-            echo 'Email errata';
+            echo 'Email errata <br>';
+            $mail=false;
         }else{
-            echo 'Email corretta';
+            $mail=true;
         }
     ?>
      <!--controllo inserimento nome  -->
@@ -33,20 +35,31 @@
         if(empty ( $_GET['nome'] ) ) {
             echo 'ERRORE Non è stato inserito nessun valore per nome';
         }else if(strlen($_GET['nome']) > 3 ){
-            echo 'nome valido';
+            $nome=true;
         }else{
-            echo 'nome non valido';
+            echo 'nome non valido <br>';
+            $nome=false;
         }
     ?> 
     <!-- controllo numero -->
     <?php
         if(empty ( $_GET['eta'] ) ) {
             echo 'ERRORE Non è stato inserito nessun valore per eta';
-        }else if(is_int($_GET['eta'])){
-            echo 'numero corretto';
+        }else if(is_numeric($_GET['eta'])){
+            $eta=true;
         }else{
-            echo 'non hai inserito un numero';
+            echo 'non hai inserito un numero <br>';
+            $eta=false;
         }
-    ?> 
+    ?>
+    <!-- stampa se tutto corretto -->
+    <?php
+        if($mail=true && $nome=true && $eta=true){
+            echo 'ACCESSO RIUSCITO';
+        }else{
+            echo 'ACCESSO NEGATO';
+        }
+
+    ?>
 </body>
 </html>
