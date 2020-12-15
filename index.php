@@ -21,6 +21,7 @@
     ?> 
     <!-- controlla inserimento mail -->
      <?php
+     //controllo prima che ci sia scritto qualcosa e poi che siano presenri contemporaneamente entrambe le casistiche
         if(empty ( $_GET['email'] ) ) {
             echo 'ERRORE Non è stato inserito nessun valore per mail';
         }else if( strpos($_GET['email'] , '@' )=== false || strpos($_GET['email'] , '.' ) === false) {
@@ -32,6 +33,7 @@
     ?>
      <!--controllo inserimento nome  -->
     <?php
+    //controllo prima che ci sia scritto qualcosa e poi se la stringa è più lunga di 3 caratteri
         if(empty ( $_GET['nome'] ) ) {
             echo 'ERRORE Non è stato inserito nessun valore per nome';
         }else if(strlen($_GET['nome']) > 3 ){
@@ -43,6 +45,7 @@
     ?> 
     <!-- controllo numero -->
     <?php
+    //controllo prima che ci sia scritto qualcosa poi che sia un numero
         if(empty ( $_GET['eta'] ) ) {
             echo 'ERRORE Non è stato inserito nessun valore per eta';
         }else if(is_numeric($_GET['eta'])){
@@ -54,12 +57,12 @@
     ?>
     <!-- stampa se tutto corretto -->
     <?php
+    //stampo accesso riuscito solo se tutte e tre le condizioni sono vere
         if($mail=true && $nome=true && $eta=true){
             echo 'ACCESSO RIUSCITO';
         }else{
             echo 'ACCESSO NEGATO';
         }
-
     ?>
 </body>
 </html>
